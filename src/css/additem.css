@@ -1,0 +1,88 @@
+.add-item-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.add-item-wrapper h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #111;
+}
+
+.add-item-card {
+    background: #ffffff;
+    border: 2px solid #000;
+    border-radius: 8px;
+    padding: 24px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    min-width: 350px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.add-item-card input,
+.add-item-card select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #fafafa;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.add-item-card input:focus,
+.add-item-card select:focus {
+    border-color: #000;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.add-btn {
+    margin-top: 8px;
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.add-btn:hover {
+    background: #333;
+}
+
+.add-btn:active {
+    transform: scale(0.98);
+}

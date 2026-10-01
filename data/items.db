@@ -1,0 +1,7 @@
+{"name":"watch","categoryId":"h3dMG0FYNTXEQpjK","amount":3,"price":"3400","_id":"9eVY2h4wObK83LIo","createdAt":{"$$date":1790834100567},"updatedAt":{"$$date":1790840414398}}
+{"name":"brake","categoryId":"h3dMG0FYNTXEQpjK","amount":1,"price":10,"_id":"bExZ6UF3amv3VMXU","createdAt":{"$$date":1790843097167},"updatedAt":{"$$date":1790843097167}}
+{"name":"ch3ck","categoryId":"Z9oeCgFBxpFujglK","amount":1,"price":200,"_id":"bT218Oh2U0GXj5hY","createdAt":{"$$date":1790843086715},"updatedAt":{"$$date":1790843086715}}
+{"name":"Phone","categoryId":"Z9oeCgFBxpFujglK","amount":1,"price":30000,"_id":"iAAS3MYdncBk9NwL","createdAt":{"$$date":1790842880785},"updatedAt":{"$$date":1790842880785}}
+{"name":"sketch","categoryId":"Z9oeCgFBxpFujglK","amount":1,"price":2000,"_id":"jQLpEB2Ekqcogz9L","createdAt":{"$$date":1790843078836},"updatedAt":{"$$date":1790843078836}}
+{"$$deleted":true,"_id":"bT218Oh2U0GXj5hY"}
+{"$$deleted":true,"_id":"bExZ6UF3amv3VMXU"}
