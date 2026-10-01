@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Inventory from '../inventory/inventory';
+import Inventory from '../inventory/Inventory';
 import '../css/additem.css'
 
 function AddItem() {

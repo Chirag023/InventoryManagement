@@ -1,4 +1,4 @@
-import Inventory from '../inventory/inventory';
+import Inventory from '../inventory/Inventory';
 import Navbar from '../Components/Navbar';
 
 function Home() {
