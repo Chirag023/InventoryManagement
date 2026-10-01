@@ -1,12 +1,15 @@
 import Datastore from 'nedb-promises';
 import express from 'express';
 import cors from 'cors';
+import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import formatDate from './src/utils/date.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+//Multer config(for image)
 
 const app = express()
 const PORT = 5000;
@@ -36,6 +39,20 @@ itemsDB.compactDatafile(); //clear duplicates every run./restarrt
 app.use(cors());
 app.use(express.json());
 
+//making uploads foler publicly accessable 
+app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
+
+// Setup storage for file upload
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/'); // Make sure an 'uploads' folder exists in your backend root directory
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Append timestamp to prevent name collisions
+    }
+});
+const upload = multer({ storage: storage });
+
 //INVENTORY
 // Get all items
 
@@ -51,19 +68,23 @@ app.get('/api/items', async (req, res) => {
 
 // Add new items
 
-app.post('/api/items', async (req, res) =>{
+app.post('/api/items', upload.single('image'), async (req, res) =>{
     try{
         const { name, categoryId, amount, price } = req.body;
+
+        // If a file was uploaded, construct its public URL path
+        const imagePath = req.file ? `http://localhost:5000/uploads/${req.file.filename}` : null;
+
         if(!name || !name.trim()) {
             return res.status(400).json({ error: 'Item name required'});
-
         }
 
         const newItem = {
             name: name.trim(),
             categoryId: categoryId || 'N/A',//save categoryId
-            amount: Number(amount),
-            price: Number(price)
+            amount: Number(amount) || 0,
+            price: Number(price) || 0,
+            image: imagePath
         };
 
         const insertedItem = await itemsDB.insert(newItem);

@@ -74,11 +74,11 @@ function Inventory({ refreshKey }){
                                 <div className="card-name">{item.name}</div>
 
                                 <div className="card-image-box">
-                                    {/*item.image ? (
+                                    {item.image ? (
                                         <img src={item.image} alt={item.name} />
                                     ) : (
-                                        <span>Image</span>
-                                    )*/}
+                                        <span>No Image</span>
+                                    )}
                                 </div>
                                 
                                 {/*}

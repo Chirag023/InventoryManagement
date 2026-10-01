@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import Inventory from '../inventory/inventory';
-import Navbar from '../Components/Navbar';
 import '../css/additem.css'
 
 function AddItem() {
@@ -22,32 +21,35 @@ function AddItem() {
     }, []);
   
   //add items
-  const handleAddItem = async () => {
-    if ( !itemName.trim()) return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Use FormData because we are sending a file alongside text data
+    const formData = new FormData();
+    formData.append('name', itemName);
+    formData.append('categoryId', selectedCategory);
+    formData.append('price', price);
+    formData.append('amount', amount);
+    if (imageFile) {
+        formData.append('image', imageFile); // Append the actual file
+    }
 
     try{
         const res = await fetch('http://localhost:5000/api/items', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                name: itemName.trim(),
-                categoryId: selectedCategory,
-                amount: Number(amount),
-                price: Number(price)
-            }),
-    });
+            body: formData,
+        });
+        if (!res.ok) throw new Error('Failed to add item');
 
-    if (!res.ok) throw new Error('Failed to add item');
-
-    setItemName('');
-    setSelectedCategory('');
-    setAmount('');
-    setPrice('');
-    setRefreshKey((prev) => prev + 1);
-    
+        //Reset form
+        setItemName('');
+        setSelectedCategory('');
+        setAmount('');
+        setPrice('');
+        setRefreshKey((prev) => prev + 1);
     } catch (err) {
         console.error(err);
-    }
+    };
+
   };
 
   return (
@@ -56,64 +58,63 @@ function AddItem() {
 
         <div className="add-item-wrapper">
             <div className="add-item-card">
-    
-                <div className="form-group">
-                    <input
-                        type="text"
-                        placeholder="Item Name"
-                        value={itemName}
-                        onChange={(e) => setItemName(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleAddItem()}
-                    />
-                </div>
-
-                <div className="form-group">
-                    <select
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                    >
-                        <option value="" hidden>Select Category</option>
-                        {Array.isArray(category) && category.map((cat) => (
-                            <option key={cat._id} value={cat._id}>{cat.name}</option>
-                        ))}
-                    </select>
-                </div>
-
-                <div className="form-row">
+                <form onSubmit={handleSubmit} className="add-item-form">
                     <div className="form-group">
-                        <label>Initial Amount</label>
                         <input
-                            type="number"
-                            placeholder="0"
-                            value={amount}
-                            onChange={(e) => setAmount(e.target.value)}
+                            type="text"
+                            placeholder="Item Name"
+                            value={itemName}
+                            onChange={(e) => setItemName(e.target.value)}
                         />
                     </div>
 
                     <div className="form-group">
-                        <label>Price (RS.)</label>
-                        <input
-                            type="number"
-                            placeholder="0.00"
-                            value={price}
-                            onChange={(e) => setPrice(e.target.value)}
+                        <select
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                        >
+                            <option value="" hidden>Select Category</option>
+                            {Array.isArray(category) && category.map((cat) => (
+                                <option key={cat._id} value={cat._id}>{cat.name}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group">
+                            <label>Initial Amount</label>
+                            <input
+                                type="number"
+                                placeholder="0"
+                                value={amount}
+                                onChange={(e) => setAmount(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label>Price (RS.)</label>
+                            <input
+                                type="number"
+                                placeholder="0.00"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    {/* File Input for Images */}
+                    <div className="form-group">
+                        <input 
+                            type="file" 
+                            accept="image/*" 
+                            onChange={(e) => setImageFile(e.target.files[0])} 
                         />
                     </div>
-                </div>
 
-                {/* File Input for Images */}
-                <div className="file-input-group">
-                    <label>Item Image:</label>
-                    <input 
-                        type="file" 
-                        accept="image/*" 
-                        onChange={(e) => setImageFile(e.target.files[0])} 
-                    />
-                </div>
-
-                <button className="add-btn" onClick={handleAddItem}>
-                    Add Item
-                </button>
+                    <button type="submit" className="add-btn" >
+                        Add Item
+                    </button>
+                </form>
             </div>
         </div>
 
