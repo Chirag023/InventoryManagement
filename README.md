@@ -1,16 +1,15 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project was made entirely from React and expressJS. 
+NeDB was used to make use of sorting/search function for JSON data.
 
-Currently, two official plugins are available:
+In order to use image file multer was used to expedite the process.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Make sure to have an uploads folder alongside the data folder. 
+The "data" folder is used to store all the data/items that are created/added.
+The "uploads" folder is used to store any and all image files.
 
-## React Compiler
+In order to run the project make sure to go to the saved folder and run 2 cmd, 
+1 for server and 1 for the application.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+use: npm run server and npm run dev.
